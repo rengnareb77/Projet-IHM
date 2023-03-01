@@ -41,8 +41,9 @@ public class Main {
         System.out.println(serverResponse.toString());
     
         while ((userInput = stdIn.readLine()) != null) {
+            serverResponse = new StringBuilder();
             out.println(userInput);
-            if (userInput.equalsIgnoreCase("quit")) {
+            if (userInput.equalsIgnoreCase("bye")) {
                 break;
             }
             while(good){
@@ -56,6 +57,7 @@ public class Main {
                 serverResponse.append(line);
             }
             System.out.println(serverResponse);
+            
         }
         
         out.close();
