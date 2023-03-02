@@ -31,14 +31,14 @@ public class Main {
         while(good){
             String line = in.readLine();
         
-            if(line.charAt(0) == '0'){
+            if(line.charAt(0) == '0'|| line.charAt(0) == '2'){
                 good = false;
             } else {
                 line += "\n";
             }
             serverResponse.append(line);
         }
-        System.out.println(serverResponse.toString());
+        System.out.println(serverResponse);
     
         while ((userInput = stdIn.readLine()) != null) {
             good = true;
