@@ -41,6 +41,7 @@ public class Main {
         System.out.println(serverResponse.toString());
     
         while ((userInput = stdIn.readLine()) != null) {
+            good = true;
             serverResponse = new StringBuilder();
             out.println(userInput);
             if (userInput.equalsIgnoreCase("bye")) {
@@ -48,8 +49,11 @@ public class Main {
             }
             while(good){
                 String line = in.readLine();
+                if (line.isBlank()) {
+                    break;
+                }
         
-                if(line.charAt(0) == '0'){
+                if(line.charAt(0) == '0' || line.charAt(0) == '2'){
                     good = false;
                 } else {
                     line += "\n";
