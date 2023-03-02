@@ -14,6 +14,7 @@ public class CommandExecutor {
 				case "pwd" -> (new CommandePWD(ps, commande)).execute();
 				case "stor" -> (new CommandeSTOR(ps, commande)).execute();
 				case "mkdir" -> (new CommandeMKDIR(ps, commande)).execute();
+				case "rmdir" -> (new CommandeRMDIR(ps, commande)).execute();
 				default -> ps.println("2 Commande inconnue !");
 			}
 			
