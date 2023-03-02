@@ -26,14 +26,20 @@ public class CommandExecutor {
 			// Envoyer (uploader) un fichier
 			if(commande.split(" ")[0].equals("stor"))
 				(new CommandeSTOR(ps, commande)).execute();
-							}
-		else {
+			
+			// Créer un dossier
+			if(commande.split(" ")[0].equals("mkdir"))
+				(new CommandeMKDIR(ps, commande)).execute();
+			
+		} else {
 			if(commande.split(" ")[0].equals("pass") || commande.split(" ")[0].equals("user")) {
 				// Le mot de passe pour l'authentification
-				if(commande.split(" ")[0].equals("pass")) (new CommandePASS(ps, commande)).execute();
+				if(commande.split(" ")[0].equals("pass"))
+					(new CommandePASS(ps, commande)).execute();
 	
 				// Le login pour l'authentification
-				if(commande.split(" ")[0].equals("user")) (new CommandeUSER(ps, commande)).execute();
+				if(commande.split(" ")[0].equals("user"))
+					(new CommandeUSER(ps, commande)).execute();
 			}
 			else
 				ps.println("2 Vous n'êtes pas connecté !");
