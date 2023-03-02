@@ -7,29 +7,15 @@ public class CommandExecutor {
 	
 	public static void executeCommande(PrintStream ps, String commande) {
 		if(userOk && pwOk) {
-			// Changer de repertoire. Un (..) permet de revenir au repertoire superieur
-			if(commande.split(" ")[0].equals("cd"))
-				(new CommandeCD(ps, commande)).execute();
-	
-			// Telecharger un fichier
-			if(commande.split(" ")[0].equals("get"))
-				(new CommandeGET(ps, commande)).execute();
-			
-			// Afficher la liste des fichiers et des dossiers du repertoire courant
-			if(commande.split(" ")[0].equals("ls"))
-				(new CommandeLS(ps, commande)).execute();
-		
-			// Afficher le repertoire courant
-			if(commande.split(" ")[0].equals("pwd"))
-				(new CommandePWD(ps, commande)).execute();
-			
-			// Envoyer (uploader) un fichier
-			if(commande.split(" ")[0].equals("stor"))
-				(new CommandeSTOR(ps, commande)).execute();
-			
-			// Créer un dossier
-			if(commande.split(" ")[0].equals("mkdir"))
-				(new CommandeMKDIR(ps, commande)).execute();
+			switch (commande.split(" ")[0]) {
+				case "cd" -> (new CommandeCD(ps, commande)).execute();
+				case "get" -> (new CommandeGET(ps, commande)).execute();
+				case "ls" -> (new CommandeLS(ps, commande)).execute();
+				case "pwd" -> (new CommandePWD(ps, commande)).execute();
+				case "stor" -> (new CommandeSTOR(ps, commande)).execute();
+				case "mkdir" -> (new CommandeMKDIR(ps, commande)).execute();
+				default -> ps.println("2 Commande inconnue !");
+			}
 			
 		} else {
 			if(commande.split(" ")[0].equals("pass") || commande.split(" ")[0].equals("user")) {
