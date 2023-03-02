@@ -12,10 +12,10 @@ Ce projet a pour but mettre en place une connexion client/serveur en Java.
 
 - [ ] CD : Changer de répertoire courant du côté du serveur
 - [ ] GET : Télécharger un fichier du serveur vers le client 
-- [ ] LS : afficher la liste des dossiers et des fichiers du répertoire courant du serveur
-- [ ] PASS : Envoyer le mot de passe
+- [x] LS : afficher la liste des dossiers et des fichiers du répertoire courant du serveur
+- [x] PASS : Envoyer le mot de passe
 - [x] PWD : Afficher le chemin absolu du dossier courant
 - [ ] STOR : Envoyer un fichier vers le dossier courant serveur
 - [x] USER : Envoyer le nom du login
 - [x] MKDIR : Créer un nouveau dossier dans le pwd
-- [] RMDIR : pour supprimer un dossier s’il est vide
+- [x] RMDIR : pour supprimer un dossier s’il est vide
