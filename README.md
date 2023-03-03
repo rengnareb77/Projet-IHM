@@ -10,7 +10,7 @@ Ce projet a pour but mettre en place une connexion client/serveur en Java.
 
 ## Commandes à développer
 
-- [ ] CD : Changer de répertoire courant du côté du serveur
+- [x] CD : Changer de répertoire courant du côté du serveur
 - [ ] GET : Télécharger un fichier du serveur vers le client 
 - [x] LS : afficher la liste des dossiers et des fichiers du répertoire courant du serveur
 - [x] PASS : Envoyer le mot de passe
