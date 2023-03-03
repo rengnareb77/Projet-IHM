@@ -8,7 +8,7 @@ public class CommandeLS extends Commande {
 	}
 
 	public void execute() {
-		String path = (new File(".")).getAbsoluteFile().toString();
+		String path = System.getProperty("user.dir");
 		File directory = new File(path);
 		
 		if (!directory.exists()) {
