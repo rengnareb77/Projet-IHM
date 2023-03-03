@@ -8,8 +8,7 @@ public class CommandePWD extends Commande {
 	}
 
 	public void execute() {
-		File file = new File(".");
-		String s = file.getAbsoluteFile().toString();
+		String s = System.getProperty("user.dir");
 		ps.println("0 " + s);
 	}
 
