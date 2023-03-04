@@ -8,7 +8,7 @@ public class CommandeGET {
             File file = new File(commande.split(" ")[1]);
             
             if (file.exists()){
-                System.out.println("> Le fichier existe déjà souhaiter vous le remplacer ? (y/n)");
+                System.out.println("> Le fichier existe déjà souhaitez vous le remplacer ? (y/n)");
                 Scanner sc = new Scanner(System.in);
                 String reponse;
                 do {
