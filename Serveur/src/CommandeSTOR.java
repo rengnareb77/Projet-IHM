@@ -7,7 +7,7 @@ public class CommandeSTOR extends Commande {
 	}
 
 	public void execute() {
-		ps.println("La commande stor n'est pas encoré implémentée");
+		ps.println("2 La commande stor n'est pas encoré implémentée");
 	}
 
 }

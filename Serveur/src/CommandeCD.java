@@ -27,11 +27,24 @@ public class CommandeCD extends Commande {
 			return;
 		}
 		
+		if (commandeArgs[0].contains("..")) {
+			String commandePath = commandeArgs[0];
+			if (commandePath.endsWith("/")) {
+				commandePath = commandePath.substring(0, commandePath.length() - 1);
+			}
+			int nbDots = commandePath.split("/").length;
+			for (int i = 0; i < nbDots; i++) {
+				path = path.substring(0, path.lastIndexOf("/"));
+			}
+			System.setProperty("user.dir", path);
+			ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
+			return;
+		}
+		
 		// Déplacement vers le répertoire (non fonctionnel)
 		System.setProperty("user.dir", directory.getAbsolutePath());
 		ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
 		
-		System.out.println(directory.getAbsolutePath());
 	}
 
 }
