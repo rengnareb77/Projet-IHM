@@ -9,20 +9,31 @@ public class CommandeUSER extends Commande {
 
 	public void execute() {
 		// Ce serveur accepte uniquement le user breton
-		if(commandeArgs[0].equalsIgnoreCase("breton")) {
-			CommandExecutor.userOk = true;
-			ps.println("0 Commande user OK");
-			File file = new File(commandeArgs[0]);
-			if (!file.exists()) {
-				file.mkdir();
-			}
-			
-			
-			
-		}
-		else {
-			ps.println("2 Le user " + commandeArgs[0] + " n'existe pas");
-		}
+        String path = System.getProperty("user.dir");
+        boolean contains = false;
+        File file = new File(path);
+        String[] files = file.list();
+        if (files == null) {
+            ps.println("2 Le user " + commandeArgs[0] + " n'existe pas");
+            return;
+        }
+        for (String f : files) {
+            if (f.equals(commandeArgs[0].toLowerCase())) {
+                contains = true;
+                break;
+            }
+        }
+        
+        if (contains) {
+            CommandExecutor.userOk = true;
+            ps.println("0 Commande user OK");
+			path = path + "/" + commandeArgs[0].toLowerCase();
+			System.setProperty("user.dir", path);
+        }
+        else {
+            ps.println("2 Le user " + commandeArgs[0] + " n'existe pas");
+        }
+		
 		
 	}
 
