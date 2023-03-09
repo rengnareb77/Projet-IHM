@@ -9,19 +9,23 @@ import java.net.Socket;
 
 public class CommandeSTOR extends Commande {
 
-    public CommandeSTOR(Client client,PrintStream ps, String commandeStr) {
-        super(client,ps, commandeStr);
+    public CommandeSTOR(PrintStream ps, String commandeStr) {
+        super(ps, commandeStr);
     }
 
     public void execute() {
         ps.println("0 Nouveau socket sur le port 4000 est créé pour la transmission des données");
         String filepath = System.getProperty("user.dir");
+        System.out.println(filepath);
+        System.out.println(this.commandeArgs[0]);
+        File file = new File (filepath + "/ressources" +"/" +this.commandeArgs[0]);
 
         try (ServerSocket dataSocket = new ServerSocket(4000)) {// créer une socket serveur sur le port 4000
             Socket socket = dataSocket.accept(); // attendre la connexion d'un client
-
+            System.out.println("la connexion a été accepté");
+            
             InputStream in = socket.getInputStream();// récupérer le flux d'entrée du socket
-            OutputStream file = new FileOutputStream(filepath);// récupérer le flux de sortie du fichier
+            OutputStream fileS = new FileOutputStream(filepath+ "/ressources" +"/" +this.commandeArgs[0]);// récupérer le flux de sortie du fichier créer fichier si existe pas
 
             byte[] buffer = new byte[4096];
             int count;
@@ -29,9 +33,9 @@ public class CommandeSTOR extends Commande {
             while ((count = in.read(buffer)) > 0) {
                 String s = new String(buffer, 0, count);// convertir le tableau de byte en String
                 System.out.println(s);
-                file.write(buffer, 0, count);// écrire dans le fichier
+                fileS.write(buffer, 0, count);// écrire dans le fichier
             }
-            file.close();
+            fileS.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
