@@ -3,12 +3,12 @@ import java.io.PrintStream;
 
 public class CommandeLS extends Commande {
 	
-	public CommandeLS(PrintStream ps, String commandeStr) {
-		super(ps, commandeStr);
+	public CommandeLS(Client client,PrintStream ps, String commandeStr) {
+		super(client,ps, commandeStr);
 	}
 
 	public void execute() {
-		String path = System.getProperty("user.dir");
+		String path = client.userDir;
 		File directory = new File(path);
 		
 		if (!directory.exists()) {

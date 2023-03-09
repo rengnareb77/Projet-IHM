@@ -2,8 +2,8 @@ import java.io.*;
 
 public class CommandeGET extends Commande {
 	
-	public CommandeGET(PrintStream ps, String commandeStr) {
-		super(ps, commandeStr);
+	public CommandeGET(Client client,PrintStream ps, String commandeStr) {
+		super(client,ps, commandeStr);
 	}
 
 	public void execute() {
@@ -12,7 +12,7 @@ public class CommandeGET extends Commande {
 			return;
 		}
 		
-		String path = System.getProperty("user.dir");
+		String path = client.userDir;
 		File file = new File(path + "/" + commandeArgs[0]);
 		// Vérification de l'existence du fichier
 		if (!file.exists()) {

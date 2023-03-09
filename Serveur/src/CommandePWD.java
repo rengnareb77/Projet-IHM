@@ -3,12 +3,12 @@ import java.io.PrintStream;
 
 public class CommandePWD extends Commande {
 	
-	public CommandePWD(PrintStream ps, String commandeStr) {
-		super(ps, commandeStr);
+	public CommandePWD(Client client,PrintStream ps, String commandeStr) {
+		super(client,ps, commandeStr);
 	}
 
 	public void execute() {
-		String s = System.getProperty("user.dir");
+		String s = client.userDir;
 		ps.println("0 " + s);
 	}
 

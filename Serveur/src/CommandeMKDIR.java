@@ -7,8 +7,8 @@ import java.io.File;
 import java.io.PrintStream;
 
 public class CommandeMKDIR extends Commande {
-    public CommandeMKDIR(PrintStream ps, String commandeStr) {
-        super(ps, commandeStr);
+    public CommandeMKDIR(Client client,PrintStream ps, String commandeStr) {
+        super(client,ps, commandeStr);
     }
     
     public void execute() {
@@ -16,7 +16,8 @@ public class CommandeMKDIR extends Commande {
             this.ps.println("2 Il est nécessaire de spécifier un nom de dossier");
             return;
         }
-        File file = new File(this.commandeArgs[0]);
+        String path = client.userDir;
+        File file = new File(path + "/" + this.commandeArgs[0]);
         if (file.exists()){
             this.ps.println("2 Le dossier existe déjà");
             return;

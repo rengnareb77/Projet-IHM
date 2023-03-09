@@ -3,8 +3,8 @@ import java.io.PrintStream;
 
 public class CommandeCD extends Commande {
 	
-	public CommandeCD(PrintStream ps, String commandeStr) {
-		super(ps, commandeStr);
+	public CommandeCD(Client client,PrintStream ps, String commandeStr) {
+		super(client,ps, commandeStr);
 	}
 
 	public void execute() {
@@ -14,7 +14,7 @@ public class CommandeCD extends Commande {
 			return;
 		}
 		
-		String path = System.getProperty("user.dir");
+		String path = client.userDir;
 		File directory = new File(path + "/" + commandeArgs[0]);
 		// Vérification de l'existence du répertoire
 		if (!directory.exists()) {
@@ -36,13 +36,13 @@ public class CommandeCD extends Commande {
 			for (int i = 0; i < nbDots; i++) {
 				path = path.substring(0, path.lastIndexOf("/"));
 			}
-			System.setProperty("user.dir", path);
+			client.userDir =  path;
 			ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
 			return;
 		}
 		
 		// Déplacement vers le répertoire (non fonctionnel)
-		System.setProperty("user.dir", directory.getAbsolutePath());
+		client.userDir =  directory.getAbsolutePath();
 		ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
 		
 	}

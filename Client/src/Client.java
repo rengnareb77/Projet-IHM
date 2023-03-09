@@ -1,8 +1,12 @@
 import java.io.*;
 import java.net.*;
 
-public class Client {
+public class Client{
+
+    public String userDir;
     
+    public boolean userOk = false;
+    public boolean pwOk = false;
     public static void main(String[] args)  {
         String userInput;
         String line;
@@ -36,13 +40,13 @@ public class Client {
     
         try {
             // Récupérer la première réponse du serveur
-            while(true){
+            do {
                 line = in.readLine();
+                if (!(line.charAt(0) == '0' || line.charAt(0) == '2'))
+                    line += "\n";
         
-                if(line.charAt(0) == '0'|| line.charAt(0) == '2') break;
-                else line += "\n";
                 serverResponse.append(line);
-            }
+            } while (line.charAt(0) != '0' && line.charAt(0) != '2');
             System.out.println(serverResponse);
     
             // On envoie la commande au serveur et on affiche la réponse du serveur

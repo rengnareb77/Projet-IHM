@@ -2,16 +2,16 @@ import java.io.*;
 
 public class CommandePASS extends Commande {
 	
-	public CommandePASS(PrintStream ps, String commandeStr) {
-		super(ps, commandeStr);
+	public CommandePASS(Client client,PrintStream ps, String commandeStr) {
+		super(client,ps, commandeStr);
 	}
 
 	public void execute() {
-		if (!CommandExecutor.userOk) {
+		if (!client.userOk) {
 			ps.println("2 Veuillez utiliser la commande `user` avant");
 			return;
 		}
-		String path = System.getProperty("user.dir");
+		String path = client.userDir;
 		File f = new File(path);
 		String[] files = f.list();
 		if (files == null) {
@@ -33,7 +33,7 @@ public class CommandePASS extends Commande {
 			BufferedReader br = new BufferedReader(new FileReader(path + "/pw.txt"));
 			String pass = br.readLine();
 			if (pass.equals(commandeArgs[0])) {
-				CommandExecutor.pwOk = true;
+				client.pwOk = true;
 				ps.println("1 Commande pass OK");
 				ps.println("0 Vous êtes bien connecté sur notre serveur");
 			}
@@ -44,9 +44,6 @@ public class CommandePASS extends Commande {
 			ps.println("2 Une erreur est survenue");
 			
 		}
-		
-		
-		
 	}
 
 }
