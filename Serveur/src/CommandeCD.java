@@ -14,7 +14,7 @@ public class CommandeCD extends Commande {
 			return;
 		}
 		
-		String path = client.userDir;
+		StringBuilder path = new StringBuilder(client.userDir);
 		File directory = new File(path + "/" + commandeArgs[0]);
 		// Vérification de l'existence du répertoire
 		if (!directory.exists()) {
@@ -27,22 +27,35 @@ public class CommandeCD extends Commande {
 			return;
 		}
 		
+		// Cas du déplacement vers le répertoire parent
 		if (commandeArgs[0].contains("..")) {
 			String commandePath = commandeArgs[0];
 			if (commandePath.endsWith("/")) {
 				commandePath = commandePath.substring(0, commandePath.length() - 1);
 			}
-			int nbDots = commandePath.split("/").length;
-			for (int i = 0; i < nbDots; i++) {
-				path = path.substring(0, path.lastIndexOf("/"));
+			
+			// Cas des multiples déplacements avec des ".."
+			String[] listFolder =  commandePath.split("/");
+			
+			for (String folder : listFolder) {
+				if (folder.equals(".."))
+					path = new StringBuilder(path.substring(0, path.lastIndexOf("/")));
+				else
+					path.append("/").append(folder);
 			}
-			client.userDir =  path;
+			
+			// Vérification que le chemin ne sort pas du répertoire de travail
+			if (path.length() <= client.workspace.length()) {
+			 ps.println("2 Vous ne pouvez pas sortir du répertoire de travail.");
+			 return;
+			}
+			
+			client.userDir = path.toString();
 			ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
 			return;
 		}
 		
-		// Déplacement vers le répertoire (non fonctionnel)
-		client.userDir =  directory.getAbsolutePath();
+		client.userDir += "/" + commandeArgs[0];
 		ps.println("0 Déplacement effectué vers " + commandeArgs[0]);
 		
 	}

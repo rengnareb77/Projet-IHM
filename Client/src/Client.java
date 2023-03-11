@@ -7,6 +7,10 @@ public class Client{
     
     public boolean userOk = false;
     public boolean pwOk = false;
+    public final String workspace;
+    
+    public Client(String workspace) {this.workspace = workspace;}
+    
     public static void main(String[] args)  {
         String userInput;
         String line;
