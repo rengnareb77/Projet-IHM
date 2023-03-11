@@ -5,7 +5,7 @@ public class CommandeSender {
     public static void sendCommande(BufferedReader in, String commande) throws IOException{
         switch (commande.split(" ")[0]) {
             case "get" -> CommandeGET.send(in,commande);
-            case "stor" -> CommandeSTOR.send();
+            case "stor" -> CommandeSTOR.send(in, commande);
             default -> {
                 StringBuilder serverResponse = new StringBuilder();
                 String line;

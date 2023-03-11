@@ -1,47 +1,76 @@
 import java.io.*;
-import java.util.Scanner;
+import java.net.Socket;
 
 public class CommandeGET {
     public static void send( BufferedReader in,String commande )  {
-        //recevoir le fichier
-        try{
-            File file = new File(commande.split(" ")[1]);
-            
-            if (file.exists()){
-                System.out.println("> Le fichier existe déjà souhaitez vous le remplacer ? (y/n)");
-                Scanner sc = new Scanner(System.in);
-                String reponse;
-                do {
-                    reponse = sc.nextLine();
-                } while (!(reponse.equals("y") || reponse.equals("n")));
-                
-                if (reponse.equals("n")){
-                    System.out.println("> Le fichier n'a pas été remplacé");
-                    sc.close();
-                    return;
-                }
-                file.delete();
-            }
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            while (true) {
+        String line;
+        // Socket de reception du fichier
+        Socket socketReception;
         
-                String line = in.readLine();
-                
-                if (!line.isBlank() && (line.charAt(0) == '0' || line.charAt(0) == '2')) {
-                    System.out.println(line);
-                    break;
-                }
-                if (line.startsWith("\\0") || line.startsWith("\\2"))
-                    line = line.substring(1);
-                bw.write(line+"\n");
+        // Flux de lecture du socket
+        BufferedReader lectureReception;
         
-            }
-            bw.close();
-            
+        // Flux d'écriture du socket
+        PrintStream ecritureReception = null;
+        
+        // Flux d'écriture du fichier
+        BufferedWriter ecritureFichier;
     
-        }catch (IOException e){
+        String serverName = "localhost";
+        int port = 4000;
+        
+        try{
+            String response = in.readLine();
+            if (response.startsWith("2")){
+                System.out.println(response);
+                return;
+            }
+            // Connexion au serveur
+            socketReception = new Socket(serverName, port);
+            ecritureReception = new PrintStream(socketReception.getOutputStream());
+    
+            // Création du fichier
+            File file = new File(commande.split(" ")[1]);
+    
+            // Si le fichier existe déjà
+            if (file.exists()){
+                file.delete();
+                ecritureReception.println("2 Le fichier existe déjà.");
+                socketReception.close();
+                ecritureReception.close();
+                return;
+            }
+    
+            // Ok pour la réception
+            ecritureReception.println("0");
+            
+            // Attente que le serveur ait envoyé le fichier
+            response = in.readLine();
+            if (response.startsWith("2")){
+                System.out.println(response);
+                return;
+            }
+            
+            // Réception du fichier
+            lectureReception = new BufferedReader(new InputStreamReader(socketReception.getInputStream()));
+            ecritureFichier = new BufferedWriter(new FileWriter(file));
+            // Lecture du fichier
+            while ((line = lectureReception.readLine()) != null) {
+                ecritureFichier.write(line);
+            }
+            ecritureFichier.close();
+            
+            System.out.println("0 Fichier reçu avec succès");
+            lectureReception.close();
+            ecritureReception.close();
+            socketReception.close();
+    
+            
+        } catch (IOException e){
+            System.out.println("2 Erreur lors de la réception du fichier");
             e.printStackTrace();
         }
+        
         
     }
 }

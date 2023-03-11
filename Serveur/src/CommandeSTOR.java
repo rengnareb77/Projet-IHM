@@ -9,8 +9,8 @@ import java.net.Socket;
 
 public class CommandeSTOR extends Commande {
 
-    public CommandeSTOR(PrintStream ps, String commandeStr) {
-        super(ps, commandeStr);
+    public CommandeSTOR(Client client,PrintStream ps, String commandeStr) {
+        super(client,ps, commandeStr);
     }
 
     public void execute() {
