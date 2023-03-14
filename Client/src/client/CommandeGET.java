@@ -1,8 +1,10 @@
+package client;
+
 import java.io.*;
 import java.net.Socket;
 
 public class CommandeGET {
-    public static void send( BufferedReader in,String commande )  {
+    public static String send( BufferedReader in,String commande )  {
         String line;
         // Socket de reception du fichier
         Socket socketReception;
@@ -22,8 +24,7 @@ public class CommandeGET {
         try{
             String response = in.readLine();
             if (response.startsWith("2")){
-                System.out.println(response);
-                return;
+                return response;
             }
             // Connexion au serveur
             socketReception = new Socket(serverName, port);
@@ -38,7 +39,7 @@ public class CommandeGET {
                 ecritureReception.println("2 Le fichier existe déjà.");
                 socketReception.close();
                 ecritureReception.close();
-                return;
+                return "2 Le fichier existe déjà.";
             }
     
             // Ok pour la réception
@@ -47,8 +48,7 @@ public class CommandeGET {
             // Attente que le serveur ait envoyé le fichier
             response = in.readLine();
             if (response.startsWith("2")){
-                System.out.println(response);
-                return;
+                return response;
             }
             
             // Réception du fichier
@@ -60,15 +60,15 @@ public class CommandeGET {
             }
             ecritureFichier.close();
             
-            System.out.println("0 Fichier reçu avec succès");
             lectureReception.close();
             ecritureReception.close();
             socketReception.close();
     
+            return "0 Fichier reçu avec succès";
             
         } catch (IOException e){
-            System.out.println("2 Erreur lors de la réception du fichier");
             e.printStackTrace();
+            return "2 Erreur lors de la réception du fichier";
         }
         
         

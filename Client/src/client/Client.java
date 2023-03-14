@@ -1,3 +1,5 @@
+package client;
+
 import java.io.*;
 import java.net.*;
 
@@ -59,7 +61,8 @@ public class Client{
                 // On envoie la commande au serveur
                 out.println(userInput);
                 if ( userInput == null || userInput.equals("bye")) break;
-                CommandeSender.sendCommande(in, userInput);
+                String response = CommandeSender.sendCommande(in, userInput);
+                System.out.println(response);
             }
             out.close();
             in.close();

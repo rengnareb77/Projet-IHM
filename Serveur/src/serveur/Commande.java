@@ -1,3 +1,7 @@
+package serveur;
+
+import client.Client;
+
 import java.io.PrintStream;
 
 public abstract class Commande {

@@ -1,3 +1,7 @@
+package serveur;
+
+import client.Client;
+
 import java.io.*;
 
 public class CommandePASS extends Commande {

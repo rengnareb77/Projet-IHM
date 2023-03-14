@@ -1,11 +1,13 @@
+package client;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class CommandeSender {
-    public static void sendCommande(BufferedReader in, String commande) throws IOException{
+    public static String sendCommande(BufferedReader in, String commande) throws IOException{
         switch (commande.split(" ")[0]) {
-            case "get" -> CommandeGET.send(in,commande);
-            case "stor" -> CommandeSTOR.send(in, commande);
+            case "get" -> { return CommandeGET.send(in,commande);}
+            case "stor" -> { return CommandeSTOR.send(in, commande); }
             default -> {
                 StringBuilder serverResponse = new StringBuilder();
                 String line;
@@ -26,8 +28,7 @@ public class CommandeSender {
                         serverResponse.append(line);
                     } while (!(line.charAt(0) == '0' || line.charAt(0) == '2'));
     
-                    // On affiche la réponse du serveur
-                    System.out.println(serverResponse);
+                    return serverResponse.toString();
                 
             }
         }

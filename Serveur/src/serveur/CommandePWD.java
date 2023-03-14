@@ -1,4 +1,7 @@
-import java.io.File;
+package serveur;
+
+import client.Client;
+
 import java.io.PrintStream;
 
 public class CommandePWD extends Commande {

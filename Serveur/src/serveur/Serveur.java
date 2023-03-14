@@ -1,7 +1,10 @@
-/*
+package serveur;/*
  * TP JAVA RIP
  * Min Serveur FTP
  * */
+
+
+import client.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,7 +41,7 @@ public class Serveur {
 			AtomicReference<Boolean> fin = new AtomicReference<>(false);
 			Thread t = new Thread(()  -> {
 				try {
-					Client client = new Client();
+					Client client = new Client(System.getProperty("user.dir"));
 					client.userDir = System.getProperty("user.dir");
 					String commande;
 					System.out.println("Connexion établie");

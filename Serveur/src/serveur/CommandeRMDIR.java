@@ -1,7 +1,9 @@
-//
+package serveur;//
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
+
+import client.Client;
 
 import java.io.File;
 import java.io.PrintStream;
