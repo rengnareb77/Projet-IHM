@@ -13,6 +13,10 @@ public class CommandeUSER extends Commande {
 	}
 
 	public void execute() {
+        if (commandeArgs.length < 1) {
+            ps.println("2 Il faut spécifier un user");
+            return;
+        }
 		// Ce serveur accepte uniquement le user breton
         String path = client.userDir;
         boolean contains = false;
