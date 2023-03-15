@@ -54,8 +54,7 @@ public class LoginController implements Initializable {
             BufferedReader br = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
             PrintWriter pw = new PrintWriter(this.clientSocket.getOutputStream(),true);
             if (!userOk){
-                pw.println("user " + login);
-                response = CommandeSender.sendCommande(br, "user " + login);
+                response = CommandeSender.sendCommande(pw,br, "user " + login);
                 if (response.contains("2 ")){
                     showDialog("Login incorrect");
                     return;
@@ -63,8 +62,7 @@ public class LoginController implements Initializable {
                 userOk = true;
             }
             if (!pwOk){
-                pw.println("pass " + password);
-                response = CommandeSender.sendCommande(br, "pass " + password);
+                response = CommandeSender.sendCommande(pw,br, "pass " + password);
     
                 if (response.contains("2 ")){
                     showDialog("Mot de passe incorrect");

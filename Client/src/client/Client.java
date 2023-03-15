@@ -59,9 +59,8 @@ public class Client{
             while (true) {
                 userInput = stdIn.readLine();
                 // On envoie la commande au serveur
-                out.println(userInput);
                 if ( userInput == null || userInput.equals("bye")) break;
-                String response = CommandeSender.sendCommande(in, userInput);
+                String response = CommandeSender.sendCommande(out,in, userInput);
                 System.out.println(response);
             }
             out.close();

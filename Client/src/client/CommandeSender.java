@@ -2,9 +2,11 @@ package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CommandeSender {
-    public static String sendCommande(BufferedReader in, String commande) throws IOException{
+    public static String sendCommande(PrintWriter out,BufferedReader in, String commande) throws IOException{
+        out.println(commande);
         switch (commande.split(" ")[0]) {
             case "get" -> { return CommandeGET.send(in,commande);}
             case "stor" -> { return CommandeSTOR.send(in, commande); }
