@@ -56,6 +56,7 @@ public class CommandeGET {
             ecritureFichier = new BufferedWriter(new FileWriter(file));
             // Lecture du fichier
             while ((line = lectureReception.readLine()) != null) {
+                line += "\n";
                 ecritureFichier.write(line);
             }
             ecritureFichier.close();
@@ -67,7 +68,6 @@ public class CommandeGET {
             return "0 Fichier reçu avec succès";
             
         } catch (IOException e){
-            e.printStackTrace();
             return "2 Erreur lors de la réception du fichier";
         }
         

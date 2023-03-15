@@ -33,7 +33,7 @@ public class CommandeGET extends Commande {
 		
 		// Si le fichier spécifié n'est pas un fichier
 		if (!file.isFile()) {
-			ps.println("2 Le fichier spécifié n'est pas un fichier.");
+			ps.println("2 Le fichier spécifié est un repertoire.");
 			return;
 		}
 		

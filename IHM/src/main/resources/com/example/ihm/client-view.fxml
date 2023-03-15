@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,8 +18,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
-                <MenuItem mnemonicParsing="false" text="Déconnexion" />
-                <MenuItem mnemonicParsing="false" text="Quitter" />
+                <MenuItem mnemonicParsing="false" text="Quitter" onAction="#quit" />
             </items>
           </Menu>
         </menus>
@@ -37,6 +37,7 @@
       <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -44,10 +45,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="mkdirButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="MKDIR" textAlignment="CENTER" />
-            <Button fx:id="rmdirButton" onMouseClicked="#rmdir" mnemonicParsing="false" text="RMDIR" GridPane.columnIndex="1" />
-            <Button fx:id="getButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="GET" GridPane.rowIndex="1" />
-            <Button fx:id="storeButton" mnemonicParsing="false" text="STORE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="mkdirButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#mkdir" text="MKDIR" textAlignment="CENTER" />
+            <Button fx:id="rmdirButton" mnemonicParsing="false" onMouseClicked="#rmdir" text="RMDIR" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="getButton" onMouseClicked="#get" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="GET" GridPane.rowIndex="1" />
+            <Button fx:id="storButton" onMouseClicked="#stor" mnemonicParsing="false" text="STOR" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="mkdirTextField" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>
